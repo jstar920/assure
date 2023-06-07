@@ -1,3 +1,4 @@
+#include "assertInfo.h"
 namespace assure
 {
     AssertInfo::AssertInfo(const AssureParameter& parameter)

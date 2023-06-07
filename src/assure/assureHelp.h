@@ -1,11 +1,12 @@
+#pragma once
+#include <fstream>
+#include <iostream>
+#include <functional>
+
 namespace assure
 {
-    void setHasLog(bool hasLog);
-    bool hasLog();
-    void setOfstream(std::ofstream&);
-    void setCout(std::ostream&);
-    std::ofstream& getOfstream();
-    std::ostream& getCout();
+    class AssertInfo;
+    using TestFunction = std::function<void(const std::string&, const std::string&)>;
 
     std::string bool2str(bool value)
     {
@@ -20,5 +21,7 @@ namespace assure
     }
 
     void print(const std::string& info);
+
+    int createTestCase(const std::string& caseName, const std::string& suiteName, TestFunction func);
     void handleAssertInfo(const AssertInfo& info);
 }

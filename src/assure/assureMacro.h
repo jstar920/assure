@@ -5,8 +5,7 @@
 #include "assertInfo.h"
 #include "assureHelp.h"
 
-
-#define ASSURE_PARAMETER assure::AssureParameter assureParameter(__TEST_CASE_NAME__, __FILE__, __LINE__, __FUNCTION__)
+#define ASSURE_PARAMETER assure::AssureParameter assureParameter(__TEST_CASE_NAME__, __TEST_SUITE_NAME__, __FILE__, __LINE__, __FUNCTION__)
 #define ASSERTINFO_TWO_ARGS(arg1, arg2, op) ASSURE_PARAMETER; \
                                             std::stringstream ss; \
                                             ss << "[" << #arg1 << " " << op << " " << #arg2 << "]"; \
@@ -51,4 +50,9 @@
                               ASSERTINFO_ONE_ARGS(arg "true"); \
                               assure::handleAssertInfo(assertInfo); \
                           }
+
+#define TEST(testName, testSuiteName) void testName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__); \
+                                      int dummy##testName##__LINE__ = createTestCase(testName, testSuiteName, testName); \
+                                      void testName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__)
+                                      
 

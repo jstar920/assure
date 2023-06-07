@@ -6,6 +6,7 @@ namespace assure
     struct AssureParameter
     {
       std::string caseName;
+      std::string testSuiteName;
       std::string fileName;
       int lineNo {0};
       std::string functionName;
