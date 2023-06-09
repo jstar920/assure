@@ -1,6 +1,7 @@
 #include "assureSession.h"
 #include "assureTestCase.h"
 #include "assureConfig.h"
+#include "assertInfo.h"
 namespace assure
 {
     AssureSession&  AssureSession::getInstance()
@@ -25,6 +26,18 @@ namespace assure
         {
             it->second->excute();
         }
+        const auto log = config_->logCallback();
+        log("Failed tests:");
+        for (const auto& info : assertInfos_)
+        {
+            const auto& para = info->getParameter();
+            log("=================================================================");
+            log("testsuits:" + para.testSuiteName + ", testcase:" + para.caseName);
+            log(para.fileName + ", line:" + std::to_string(para.lineNo));
+            log("--------->Expected:" + info->getExpectedInfo());
+            log("=========>Actually:" + info->getActualInfo());
+            log("\n");
+        }
     }
 
     void AssureSession::addTest(const std::string& testCaseName, const std::string& testSuiteName, const TestFunc& func)
@@ -36,7 +49,12 @@ namespace assure
 
         if (it == testSuites_.end())
         {
-            testSuites_.emplace(testSuite);
+            testSuites_.emplace(testSuiteName, testSuite);
         }
+    }
+
+    void AssureSession::addAssertInfo(const AssertInfoPtr& assertInfo)
+    {
+        assertInfos_.push_back(assertInfo);
     }
 }

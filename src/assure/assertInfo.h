@@ -1,4 +1,4 @@
-#progma once
+#pragma once
 #include <string>
 
 namespace assure
@@ -21,6 +21,7 @@ namespace assure
         std::string getExpectedInfo() const;
         void setActualInfo(const std::string& info);
         std::string getActualInfo() const;
+        const AssureParameter& getParameter() const;
     private:
         AssureParameter parameter_;
         std::string expectedInfo_;

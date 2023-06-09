@@ -11,8 +11,8 @@ include_directories (.)
 
 #add_library(tests SHARED ${TESTS_HEADERS} ${TESTS_SOURCES})
 add_executable(tests ${TESTS_HEADERS} ${TESTS_SOURCES})
-target_link_libraries(tests assure)
-
+target_link_libraries(tests PRIVATE assure_static)
+target_include_directories(tests PRIVATE ${CMAKE_SRC_ROOT_DIRECTORY}/assure) 
 
 set_property(TARGET assure PROPERTY FOLDER "libraries")
 

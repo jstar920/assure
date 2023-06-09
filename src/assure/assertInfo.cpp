@@ -25,4 +25,9 @@ namespace assure
     {
         return actualInfo_;;
     }
+
+    const AssureParameter& AssertInfo::getParameter() const
+    {
+        return parameter_;
+    }
 }
