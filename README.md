@@ -8,8 +8,10 @@ a small unit test framework
 #include "assure.h"
 ```
 
-TEST_CASE(testName, testSuiteName)
-### example: 
+### using follwoing 2 macra to create test cases
+
+1, TEST_CASE(testName, testSuiteName)
+#### example: 
 ```C++
 TEST_CASE("test1", "testsuites1")
 {
@@ -18,8 +20,8 @@ TEST_CASE("test1", "testsuites1")
 }
 ```
 
-TEST_CASE_FIXTURE(className, testName, testSuiteName)
-### example:
+2, TEST_CASE_FIXTURE(className, testName, testSuiteName)
+#### example:
 ```C++
 class Test_Fixture
 {
