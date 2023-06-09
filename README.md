@@ -30,6 +30,10 @@ TEST_CASE_FIXTURE(Test_Fixture, "test2", "testsuites1")
 
 ## Check Value
 ASSURE_EQ(arg1, arg2)
+
 ASSURE_NEQ(arg1, arg2)
+
 ASSURE_TRUE(arg)
+
 ASSURE_FALSE(arg)
+
