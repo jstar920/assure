@@ -1,6 +1,6 @@
 #include "assure.h"
 int main(int argc, char* arg[])
 {
-    assure::AssureSession::getInstance().excute();
-    return 0;
+    bool result = assure::AssureSession::getInstance().excute();
+    return result ? 0 : 1;
 }

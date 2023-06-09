@@ -20,14 +20,14 @@ namespace assure
         return config_;
     }
 
-    void AssureSession::excute()
+    bool AssureSession::excute()
     {
         for (auto it = testSuites_.cbegin(); it != testSuites_.cend(); ++it)
         {
             it->second->excute();
         }
         const auto log = config_->logCallback();
-        log("Failed tests:");
+        log("/n/nFailed tests:");
         for (const auto& info : assertInfos_)
         {
             const auto& para = info->getParameter();
@@ -38,6 +38,8 @@ namespace assure
             log("=========>Actually:" + info->getActualInfo());
             log("\n");
         }
+
+        return (assertInfos_.size() == 0);
     }
 
     void AssureSession::addTest(const std::string& testCaseName, const std::string& testSuiteName, const TestFunc& func)

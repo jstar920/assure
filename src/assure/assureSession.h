@@ -21,7 +21,7 @@ namespace assure
         AssureSession();
     public:
         AssureConfigPtr config();
-        void excute();
+        bool excute();
         void addTest(const std::string& testCaseName, const std::string& testSuiteName, const TestFunc& func);
         void addAssertInfo(const AssertInfoPtr& assertInfo);
     private:

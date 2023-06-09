@@ -60,15 +60,36 @@
 #define TEST_CASE_UNUSED_VARIABLE_TAG2(name, tag) name##tag
 #define TEST_CASE_UNUSED_VARIABLE_TAG(name, tag) TEST_CASE_UNUSED_VARIABLE_TAG2(name, tag)
 #ifdef __COUNTER__
-
 #define TEST_CASE_UNUSED_VARIABLE(name) TEST_CASE_UNUSED_VARIABLE_TAG(name, __COUNTER__)
 #else
 #define TEST_CASE_UNUSED_VARIABLE(name) TEST_CASE_UNUSED_VARIABLE_TAG(name, __LINE__)
 #endif
 
-#define ASSURE_REGESTER_TEST(testFuncionName, unusedVariable, testName, testSuiteName) static void testFuncionName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__); \
-                                                                       int unusedVariable = assure::createTestCase(testName, testSuiteName, testFuncionName); \
-                                                                       static void testFuncionName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__)
+#define ASSURE_REGESTER_TEST(testFuncionName, unusedVariable, testName, testSuiteName) \
+        static void testFuncionName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__); \
+        int unusedVariable = assure::createTestCase(testName, testSuiteName, testFuncionName); \
+        static void testFuncionName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__)
 
 #define TEST_CASE(testName, testSuiteName) ASSURE_REGESTER_TEST(TEST_CASE_FUNCTION_NAME( ASSURE_TEST_CASE_ ), TEST_CASE_UNUSED_VARIABLE(unused_), testName, testSuiteName)                                      
 
+
+#define FIXTURE_CLASS_NAME_TAG2(name, tag) name##tag
+#define FIXTURE_CLASS_NAME_TAG(name, tag) FIXTURE_CLASS_NAME_TAG2(name, tag)
+#ifdef __COUNTER__
+#define FIXTURE_CLASS_NAME(name) FIXTURE_CLASS_NAME_TAG(name, __COUNTER__)
+#else
+#define FIXTURE_CLASS_NAME(name) FIXTURE_CLASS_NAME_TAG(name, __LINE__)
+#endif
+
+#define ASSURE_REGESTER_TEST_FIXTURE(parentClassName, className, functionName, unusedVariable, testName, testSuiteName) \
+        struct className: public parentClassName \
+        { \
+             void functionName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__); \
+        }; \
+        int unusedVariable = assure::createTestCase(testName, testSuiteName, [sharedThis = std::make_shared<className>()](const std::string& caseName, const std::string& suiteName){ \
+            sharedThis->functionName(caseName, suiteName); \
+        }); \
+        void className::functionName(const std::string& __TEST_CASE_NAME__, const std::string& __TEST_SUITE_NAME__)
+
+#define TEST_CASE_FIXTURE(className, testName, testSuiteName) \
+       ASSURE_REGESTER_TEST_FIXTURE(className, FIXTURE_CLASS_NAME(FIXTURE_CLASS_), TEST_CASE_FUNCTION_NAME( ASSURE_TEST_CASE_ ), TEST_CASE_UNUSED_VARIABLE(unused_), testName, testSuiteName)
