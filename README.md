@@ -2,9 +2,10 @@
 a small unit test framework
 
 # Create test case
-```C++
+
 TEST_CASE(testName, testSuiteName)
-##example: 
+## example: 
+```C++
 TEST_CASE("test1", "testsuites1")
 {
     int a = 3, b = 2;
@@ -13,7 +14,7 @@ TEST_CASE("test1", "testsuites1")
 ```
 
 TEST_CASE_FIXTURE(className, testName, testSuiteName)
-##example:
+## example:
 ```C++
 class Test_Fixture
 {
