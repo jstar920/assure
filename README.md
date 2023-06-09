@@ -1,10 +1,10 @@
 # assure
 a small unit test framework
 
-# Create test case
+## Create test case
 
 TEST_CASE(testName, testSuiteName)
-## example: 
+### example: 
 ```C++
 TEST_CASE("test1", "testsuites1")
 {
@@ -14,7 +14,7 @@ TEST_CASE("test1", "testsuites1")
 ```
 
 TEST_CASE_FIXTURE(className, testName, testSuiteName)
-## example:
+### example:
 ```C++
 class Test_Fixture
 {
@@ -27,3 +27,9 @@ TEST_CASE_FIXTURE(Test_Fixture, "test2", "testsuites1")
     ASSURE_EQ(initValue, 1);
 }
 ```
+
+## Check Value
+ASSURE_EQ(arg1, arg2)
+ASSURE_NEQ(arg1, arg2)
+ASSURE_TRUE(arg)
+ASSURE_FALSE(arg)
