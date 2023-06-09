@@ -3,6 +3,11 @@ a small unit test framework
 
 ## Create test case
 
+### first include the header
+```C++
+#include "assure.h"
+```
+
 TEST_CASE(testName, testSuiteName)
 ### example: 
 ```C++
