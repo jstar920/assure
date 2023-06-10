@@ -6,9 +6,7 @@ namespace assure
     class AssureTestCaseFailed : public std::exception
     {
     public:
-        AssureTestCaseFailed()
-        : std::exception("Test Failed!")
-        {}
+        AssureTestCaseFailed() = default;
     private:
     };
 }
