@@ -11,7 +11,7 @@ C++14
 #include "assure.h"
 ```
 
-### using follwoing 2 macra to create test cases
+### using follwoing 2 macro to create test cases
 
 1, TEST_CASE(testName, testSuiteName)
 #### example: 
