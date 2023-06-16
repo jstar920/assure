@@ -17,9 +17,9 @@ message("CMAKE_PROJECT_ROOT_DIRECTORY: " ${CMAKE_PROJECT_ROOT_DIRECTORY})
 message("CMAKE_SRC_ROOT_DIRECTORY: " ${CMAKE_SRC_ROOT_DIRECTORY})
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(PRJECT_LIBRARIES_DIR "libraries")
-#set(PRJECT_TESTS_DIR "tests")
-set(PRJECT_TESTS_DIR "${PRJECT_LIBRARIES_DIR}/tests")
+if("${PRJECT_LIBRARIES_DIR}" STREQUAL "")
+    set(PRJECT_LIBRARIES_DIR "libraries")
+endif()
 
 add_subdirectory(src)
 add_subdirectory(tests)
