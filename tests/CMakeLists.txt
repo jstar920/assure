@@ -14,7 +14,7 @@ add_executable(assure_tests ${TESTS_HEADERS} ${TESTS_SOURCES})
 target_link_libraries(assure_tests PRIVATE assure_static)
 target_include_directories(assure_tests PRIVATE ${CMAKE_SRC_ROOT_DIRECTORY}/assure) 
 
-set_property(TARGET assure_tests PROPERTY FOLDER ${PRJECT_TESTS_DIR})
+set_property(TARGET assure_tests PROPERTY FOLDER ${PRJECT_LIBRARIES_DIR}/test)
 
 #set_target_properties(assure PROPERTIES RUNTIME_OUTPUT_DIRECTORY %{PROJECT_BINARY_DIR}/bin)
 
