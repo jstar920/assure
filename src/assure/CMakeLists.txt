@@ -14,6 +14,7 @@ add_library(assure_static STATIC ${ASSURE_HEADERS} ${ASSURE_SOURCES})
 
 set_property(TARGET assure PROPERTY FOLDER ${PRJECT_LIBRARIES_DIR})
 set_property(TARGET assure_static PROPERTY FOLDER ${PRJECT_LIBRARIES_DIR})
+target_include_directories(assure_static PUBLIC ".")
 
 #set_target_properties(assure PROPERTIES RUNTIME_OUTPUT_DIRECTORY %{PROJECT_BINARY_DIR}/bin)
 
