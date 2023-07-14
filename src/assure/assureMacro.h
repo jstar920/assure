@@ -6,7 +6,7 @@
 #define ASSURE_PARAMETER assure::AssureParameter assureParameter{__TEST_CASE_NAME__, __TEST_SUITE_NAME__, __FILE__, __LINE__, __FUNCTION__}
 #define ASSERTINFO_TWO_ARGS(arg1, arg2, op) ASSURE_PARAMETER; \
                                             std::stringstream ssExpect; \
-                                            ssExpect << "[" << #arg1 << " " << op << " " << #arg2 << "]"; \
+                                            ssExpect << "[(" << #arg1 << ") " << op << " (" << #arg2 << ")]"; \
                                             const std::string expectedInfo(ssExpect.str()); \
                                             std::stringstream ssActual; \
                                             ssActual << "[" << arg1 << " " << op << " " << arg2 << "]"; \
@@ -17,10 +17,10 @@
 
 #define ASSERTINFO_ONE_ARGS(arg, boolValue) ASSURE_PARAMETER; \
                                             std::stringstream ssExpect; \
-                                            ssExpect << "[" << #arg << " == " << boolValue << "]"; \
+                                            ssExpect << "[(" << #arg << ") is " << boolValue << "]"; \
                                             const std::string expectedInfo(ssExpect.str()); \
                                             std::stringstream ssActual; \
-                                            ssActual << "[" << bool2str(arg) << " == " << boolValue << "]"; \
+                                            ssActual << "[" << assure::bool2str(arg) << " == " << boolValue << "]"; \
                                             const std::string actualInfo(ssActual.str()); \
                                             const auto assertInfo = std::make_shared<assure::AssertInfo>(assureParameter); \
                                             assertInfo->setExpectedInfo(expectedInfo); \
@@ -28,24 +28,24 @@
 
 
 
-#define ASSURE_EQ(arg1, arg2) if (arg1 != arg2) \
+#define ASSURE_EQ(arg1, arg2) if ((arg1) != (arg2)) \
                               { \
                                   ASSERTINFO_TWO_ARGS(arg1, arg2, "=="); \
                                   assure::handleAssertInfo(assertInfo); \
                               }
-#define ASSURE_NEQ(arg1, arg2) if (arg1 == arg2)\
+#define ASSURE_NEQ(arg1, arg2) if ((arg1) == (arg2))\
                                { \
                                    ASSERTINFO_TWO_ARGS(arg1, arg2, "=="); \
                                    assure::handleAssertInfo(assertInfo); \
                                }
-#define ASSURE_TRUE(arg) if (!arg) \
+#define ASSURE_TRUE(arg) if (!(arg)) \
                          { \
-                            ASSERTINFO_ONE_ARGS(arg "true"); \
+                            ASSERTINFO_ONE_ARGS(arg, "true"); \
                             assure::handleAssertInfo(assertInfo); \
                          }
-#define ASSURE_FALSE(arg) if (arg) \
+#define ASSURE_FALSE(arg) if ((arg)) \
                           { \
-                              ASSERTINFO_ONE_ARGS(arg "true"); \
+                              ASSERTINFO_ONE_ARGS(arg, "true"); \
                               assure::handleAssertInfo(assertInfo); \
                           }
 #define TEST_CASE_FUNCTION_NAME_TAG2(name, tag) name##tag

@@ -14,5 +14,20 @@ public:
 
 TEST_CASE_FIXTURE(Test_Fixture, "test2", "testsuites1")
 {
-    ASSURE_EQ(initValue, 1);
+    ASSURE_EQ(initValue, 10);
+}
+
+TEST_CASE_FIXTURE(Test_Fixture, "test3", "testsuites1")
+{
+    ASSURE_NEQ(initValue, 11);
+}
+
+TEST_CASE_FIXTURE(Test_Fixture, "test4", "testsuites1")
+{
+    ASSURE_TRUE(initValue == 10);
+}
+
+TEST_CASE_FIXTURE(Test_Fixture, "test5", "testsuites1")
+{
+    ASSURE_FALSE(initValue == 11);
 }
