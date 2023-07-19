@@ -27,16 +27,24 @@ namespace assure
             it->second->excute();
         }
         const auto log = config_->logCallback();
-        log("/n/nFailed tests:");
-        for (const auto& info : assertInfos_)
+
+        if (assertInfos_.empty())
         {
-            const auto& para = info->getParameter();
-            log("=================================================================");
-            log("testsuits:" + para.testSuiteName + ", testcase:" + para.caseName);
-            log(para.fileName + ", line:" + std::to_string(para.lineNo));
-            log("--------->Expected:" + info->getExpectedInfo());
-            log("=========>Actually:" + info->getActualInfo());
-            log("\n");
+            log("all tests are passed");
+        }
+        else
+        {
+            log("\n\nFailed tests:");
+            for (const auto& info : assertInfos_)
+            {
+                const auto& para = info->getParameter();
+                log("=================================================================");
+                log("testsuits:" + para.testSuiteName + ", testcase:" + para.caseName);
+                log(para.fileName + ", line:" + std::to_string(para.lineNo));
+                log("--------->Expected:" + info->getExpectedInfo());
+                log("=========>Actually:" + info->getActualInfo());
+                log("\n");
+            }
         }
 
         return (assertInfos_.size() == 0);
