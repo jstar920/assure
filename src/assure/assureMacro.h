@@ -9,7 +9,7 @@
                                             ssExpect << "[(" << #arg1 << ") " << op << " (" << #arg2 << ")]"; \
                                             const std::string expectedInfo(ssExpect.str()); \
                                             std::stringstream ssActual; \
-                                            ssActual << "[" << arg1 << " " << op << " " << arg2 << "]"; \
+                                            ssActual << "[" << (arg1) << " " << op << " " << (arg2) << "]"; \
                                             const std::string actualInfo(ssActual.str()); \
                                             const auto assertInfo = std::make_shared<assure::AssertInfo>(assureParameter); \
                                             assertInfo->setExpectedInfo(expectedInfo); \
