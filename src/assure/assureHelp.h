@@ -1,6 +1,7 @@
 #pragma once
 #include <sstream>
 #include <functional>
+#include <memory>
 
 namespace assure
 {
